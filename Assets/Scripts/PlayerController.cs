@@ -12,11 +12,15 @@ public class PlayerController : MonoBehaviour
     private bool isRight = false;
 
     private Rigidbody2D rigidBody;
+    private MousesCounter mousesCounter;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        mousesCounter = GameObject.FindObjectOfType<MousesCounter>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -58,6 +62,12 @@ public class PlayerController : MonoBehaviour
         if (isRight)
         {
             rigidBody.velocity = new Vector2(playerSpeed, 0);
+        }
+
+        if (mousesCounter.GetMousesCount() == 0)
+        {
+            rigidBody.velocity = new Vector2(0, 0);
+            animator.enabled = false;
         }
     }
 

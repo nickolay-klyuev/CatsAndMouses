@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class MousesCounter : MonoBehaviour
 {
+    private int mousesCount = 10;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +17,12 @@ public class MousesCounter : MonoBehaviour
     void Update()
     {
         GameObject[] mouses = GameObject.FindGameObjectsWithTag("Mouse");
-        transform.GetComponent<Text>().text = mouses.Length.ToString();
+        mousesCount = mouses.Length;
+        transform.GetComponent<Text>().text = mousesCount.ToString();
+    }
+
+    public int GetMousesCount()
+    {
+        return mousesCount;
     }
 }
