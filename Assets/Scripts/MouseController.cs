@@ -21,12 +21,11 @@ public class MouseController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.transform.tag);
         if (collision.transform.tag == "Wall")
         {
             ChangeDirectionRandom();
