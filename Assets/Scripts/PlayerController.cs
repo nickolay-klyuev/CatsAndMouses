@@ -68,4 +68,12 @@ public class PlayerController : MonoBehaviour
         isLeft = false;
         isRight = false;
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.GetComponent<MouseController>() != null)
+        {
+            Destroy(collision.gameObject);
+        }
+    }
 }
