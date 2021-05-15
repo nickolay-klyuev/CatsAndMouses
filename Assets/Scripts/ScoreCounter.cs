@@ -35,6 +35,16 @@ public class ScoreCounter : MonoBehaviour
         scoreGlobal = score;
     }
 
+    public int GetScore()
+    {
+        return scoreGlobal;
+    }
+
+    public void ClearScore()
+    {
+        scoreGlobal = 0;
+    }
+
     private void InitialScore()
     {
         score = scoreGlobal;

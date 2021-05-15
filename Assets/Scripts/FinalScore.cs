@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class ExitController : MonoBehaviour
+public class FinalScore : MonoBehaviour
 {
     private ScoreCounter scoreCounter;
 
@@ -16,10 +16,6 @@ public class ExitController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Cancel"))
-        {
-            scoreCounter.ClearScore();
-            SceneManager.LoadScene(0);
-        }
+        transform.GetComponent<Text>().text = scoreCounter.GetScore().ToString();
     }
 }
