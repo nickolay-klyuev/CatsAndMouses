@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelCompletedController : MonoBehaviour
 {
@@ -18,6 +19,12 @@ public class LevelCompletedController : MonoBehaviour
         if (mousesCounter.GetMousesCount() == 0)
         {
             GetComponent<Animator>().SetTrigger("CompletedLevelTrigger");
+            Invoke("LoadNextLevel", 3f);
         }
+    }
+
+    void LoadNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

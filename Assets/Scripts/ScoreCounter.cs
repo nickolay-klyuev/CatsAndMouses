@@ -7,7 +7,8 @@ public class ScoreCounter : MonoBehaviour
 {
     private Transform scorePopUp;
 
-    private int score = 0;
+    static private int score = 0;
+    static private int scoreGlobal = 0;
 
     // Start is called before the first frame update
     void Start()
