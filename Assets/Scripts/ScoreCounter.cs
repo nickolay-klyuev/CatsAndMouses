@@ -7,12 +7,13 @@ public class ScoreCounter : MonoBehaviour
 {
     private Transform scorePopUp;
 
-    static private int score = 0;
+    private int score = 0;
     static private int scoreGlobal = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        InitialScore();
         scorePopUp = GameObject.Find("Score Pop Up").transform;
     }
 
@@ -27,5 +28,15 @@ public class ScoreCounter : MonoBehaviour
         score += amount;
         scorePopUp.GetComponent<Text>().text = amount.ToString();
         scorePopUp.GetComponent<Animator>().SetTrigger("PopUpTrigger");
+    }
+
+    public void SaveScore()
+    {
+        scoreGlobal = score;
+    }
+
+    private void InitialScore()
+    {
+        score = scoreGlobal;
     }
 }

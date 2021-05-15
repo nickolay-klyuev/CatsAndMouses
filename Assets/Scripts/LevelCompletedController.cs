@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 public class LevelCompletedController : MonoBehaviour
 {
     private MousesCounter mousesCounter;
+    private ScoreCounter scoreCounter;
 
     // Start is called before the first frame update
     void Start()
     {
         mousesCounter = GameObject.FindObjectOfType<MousesCounter>();
+        scoreCounter = GameObject.FindObjectOfType<ScoreCounter>();
     }
 
     // Update is called once per frame
@@ -19,6 +21,7 @@ public class LevelCompletedController : MonoBehaviour
         if (mousesCounter.GetMousesCount() == 0)
         {
             GetComponent<Animator>().SetTrigger("CompletedLevelTrigger");
+            scoreCounter.SaveScore();
             Invoke("LoadNextLevel", 3f);
         }
     }
