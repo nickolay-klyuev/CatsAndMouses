@@ -18,7 +18,6 @@ public class ExitController : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            scoreCounter.ClearScore();
             SceneManager.LoadScene(0);
         }
     }
