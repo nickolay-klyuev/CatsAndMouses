@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rigidBody;
     private MousesCounter mousesCounter;
     private Animator animator;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         mousesCounter = GameObject.FindObjectOfType<MousesCounter>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -83,6 +85,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.transform.GetComponent<MouseController>() != null)
         {
+            audioSource.Play();
+            animator.SetTrigger("HitTrigger");
             Destroy(collision.gameObject);
         }
     }
