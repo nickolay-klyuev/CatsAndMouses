@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour
             scoreToAdd *= 2;
             Invoke("DivScoreToAdd", 1f);
             Destroy(collision.gameObject);
+            playerSpeed += .2f;
         }
     }
 
