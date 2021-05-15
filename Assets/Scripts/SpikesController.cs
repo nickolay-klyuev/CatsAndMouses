@@ -25,7 +25,8 @@ public class SpikesController : MonoBehaviour
         {
             Destroy(collision.gameObject);
             audioSource.Play();
-            
+            Camera.main.GetComponent<Camera>().backgroundColor = new Color(.5f, .2f, .2f, 0);
+
             Invoke("ReloadCurrentScene", 1f);
         }
     }

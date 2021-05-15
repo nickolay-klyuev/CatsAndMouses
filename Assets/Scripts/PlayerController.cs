@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     private MousesCounter mousesCounter;
     private Animator animator;
     private AudioSource audioSource;
+    private ScoreCounter scoreCounter;
+
+    private int scoreToAdd = 100;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +26,7 @@ public class PlayerController : MonoBehaviour
         mousesCounter = GameObject.FindObjectOfType<MousesCounter>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        scoreCounter = GameObject.FindObjectOfType<ScoreCounter>();
     }
 
     // Update is called once per frame
@@ -87,7 +91,15 @@ public class PlayerController : MonoBehaviour
         {
             audioSource.Play();
             animator.SetTrigger("HitTrigger");
+            scoreCounter.AddScore(scoreToAdd);
+            scoreToAdd *= 2;
+            Invoke("DivScoreToAdd", 1f);
             Destroy(collision.gameObject);
         }
+    }
+
+    void DivScoreToAdd()
+    {
+        scoreToAdd /= 2;
     }
 }
