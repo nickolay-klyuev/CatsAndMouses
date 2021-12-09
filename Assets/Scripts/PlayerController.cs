@@ -5,11 +5,16 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float playerSpeed = 10f;
+    private float speedOffSet = 5f;
+
+    [SerializeField] private bl_Joystick joystick;
     
     private bool isUp = false;
     private bool isDown = false;
     private bool isLeft = false;
     private bool isRight = false;
+
+    private bool gameOver = false;
 
     private Rigidbody2D rigidBody;
     private MousesCounter mousesCounter;
@@ -24,7 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody2D>();
         mousesCounter = GameObject.FindObjectOfType<MousesCounter>();
-        animator = GetComponent<Animator>();
+        animator = transform.GetChild(0).GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         scoreCounter = GameObject.FindObjectOfType<ScoreCounter>();
     }
@@ -34,23 +39,19 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButton("Down"))
         {
-            ResetDirections();
-            isDown = true;
+            Down();
         }
         if (Input.GetButton("Up"))
         {
-            ResetDirections();
-            isUp = true;
+            Up();
         }
         if (Input.GetButton("Left"))
         {
-            ResetDirections();
-            isLeft = true;
+            Left();
         }
         if (Input.GetButton("Right"))
         {
-            ResetDirections();
-            isRight = true;
+            Right();
         }
 
         if (isUp)
@@ -74,6 +75,17 @@ public class PlayerController : MonoBehaviour
         {
             rigidBody.velocity = new Vector2(0, 0);
             animator.enabled = false;
+            gameOver = true;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        transform.rotation = Quaternion.identity;
+
+        if (!gameOver)
+        {
+            transform.Translate(new Vector2(Time.deltaTime * playerSpeed * joystick.Horizontal / speedOffSet, Time.deltaTime * playerSpeed * joystick.Vertical / speedOffSet));
         }
     }
 
@@ -83,6 +95,30 @@ public class PlayerController : MonoBehaviour
         isDown = false;
         isLeft = false;
         isRight = false;
+    }
+
+    public void Up()
+    {
+        ResetDirections();
+        isUp = true;
+    }
+
+    public void Down()
+    {
+        ResetDirections();
+        isDown = true;
+    }
+
+    public void Left()
+    {
+        ResetDirections();
+        isLeft = true;
+    }
+
+    public void Right()
+    {
+        ResetDirections();
+        isRight = true;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
